@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 // void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _MyAppState();
   }
 }
@@ -22,42 +24,40 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
-    print(_questionIndex);
+    // print(_questionIndex);
   }
 
   @override
   Widget build(BuildContext context) {
     var questions = [
-      'What\'s your favourite color',
-      'What\'s your favourite animal',
+      {
+        'questionText': 'What\'s your favourite color?',
+        'answers': ['Black', 'Red', 'Green', 'White']
+      },
+      {
+        'questionText': 'What\'s your favourite animal?',
+        'answers': ['Bunny', 'Cat', 'Dog', 'Chicken']
+      },
+      {
+        'questionText': 'Who\'s your favourite lecturer?',
+        'answers': ['Brad', 'Joe', 'Max', 'Fireship']
+      },
     ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('My app'),
+          backgroundColor: Colors.green,
+          centerTitle: true,
         ),
         body: Column(children: [
           Question(
-            questions[_questionIndex],
+            questions[_questionIndex]['questionText'] as String,
           ),
-          ElevatedButton(
-            onPressed: _answerQuestion,
-            child: const Text('Answer 1'),
-          ),
-          ElevatedButton(
-            onPressed: () => print('Answer 2 chosen!'),
-            child: const Text('Answer 2'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              print('Answer 3 chosen');
-            },
-            child: const Text(' Answer 3'),
-          ),
-          ElevatedButton(
-            onPressed: () => print('Answer 4 chosen!'),
-            child: const Text('Answer 4'),
-          )
+          Answer(_answerQuestion),
+          Answer(_answerQuestion),
+          Answer(_answerQuestion),
+          Answer(_answerQuestion),
         ]),
       ),
     );
