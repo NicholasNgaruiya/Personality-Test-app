@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
+    const questions = [
       {
         'questionText': 'What\'s your favourite color?',
         'answers': ['Black', 'Red', 'Green', 'White']
@@ -40,25 +40,35 @@ class _MyAppState extends State<MyApp> {
       },
       {
         'questionText': 'Who\'s your favourite lecturer?',
-        'answers': ['Brad', 'Joe', 'Max', 'Fireship']
+        'answers': ['Brad', 'Joe', 'Fireship']
       },
+      {
+        'questionText': 'Who was the first president of Kenya',
+        'answers': ['Moi', 'Uhuru', 'Kibaki', 'Ruto', 'None of the above']
+      }
     ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('My app'),
-          backgroundColor: Colors.green,
+          title: const Text('Exam app'),
+          backgroundColor: Colors.blue,
           centerTitle: true,
         ),
-        body: Column(children: [
-          Question(
-            questions[_questionIndex]['questionText'] as String,
-          ),
-          Answer(_answerQuestion),
-          Answer(_answerQuestion),
-          Answer(_answerQuestion),
-          Answer(_answerQuestion),
-        ]),
+        body: _questionIndex < questions.length
+            ? Column(children: [
+                Question(
+                  questions[_questionIndex]['questionText'] as String,
+                ),
+                ...(questions[_questionIndex]['answers'] as List<String>)
+                    .map((answer) {
+                  return Answer(_answerQuestion, answer);
+                }).toList()
+              ])
+            : const Center(
+                child: Text(
+                  'Congratulations You did it',
+                ),
+              ),
       ),
     );
   }
