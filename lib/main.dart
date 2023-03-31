@@ -58,12 +58,12 @@ class _MyAppState extends State<MyApp> {
         ],
       },
       {
-        'questionText': 'Who\'s your favorite instructor?',
+        'questionText': 'What\'s your favorite automobile brand?',
         'answers': [
-          {'text': 'Max', 'score': 1},
-          {'text': 'Max', 'score': 1},
-          {'text': 'Max', 'score': 1},
-          {'text': 'Max', 'score': 1},
+          {'text': 'Honda', 'score': 1},
+          {'text': 'Mercedes', 'score': 1},
+          {'text': 'Toyota', 'score': 1},
+          // {'text': 'Max', 'score': 1},
         ],
       },
     ];
