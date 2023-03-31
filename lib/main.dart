@@ -19,8 +19,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
+    _totalScore = _totalScore + score;
+    //could also use _totalScore += score;
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -31,36 +34,48 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     final _questions = const [
       {
-        'questionText': 'What\'s your favourite color?',
-        'answers': ['Black', 'Red', 'Green', 'White']
+        'questionText': 'What\'s your favorite color?',
+        'answers': [
+          {'text': 'Black', 'score': 10},
+          {'text': 'Red', 'score': 5},
+          {'text': 'Green', 'score': 3},
+          {'text': 'White', 'score': 1},
+        ],
       },
       {
-        'questionText': 'What\'s your favourite animal?',
-        'answers': ['Bunny', 'Cat', 'Dog', 'Chicken']
+        'questionText': 'What\'s your favorite animal?',
+        'answers': [
+          {'text': 'Rabbit', 'score': 3},
+          {'text': 'Snake', 'score': 11},
+          {'text': 'Elephant', 'score': 5},
+          {'text': 'Lion', 'score': 9},
+        ],
       },
       {
-        'questionText': 'Who\'s your favourite lecturer?',
-        'answers': ['Brad', 'Joe', 'Fireship']
+        'questionText': 'Who\'s your favorite instructor?',
+        'answers': [
+          {'text': 'Max', 'score': 1},
+          {'text': 'Max', 'score': 1},
+          {'text': 'Max', 'score': 1},
+          {'text': 'Max', 'score': 1},
+        ],
       },
-      {
-        'questionText': 'Who was the first president of Kenya',
-        'answers': ['Moi', 'Uhuru', 'Kibaki', 'Ruto', 'None of the above']
-      }
     ];
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Exam app'),
-            backgroundColor: Colors.blue,
-            centerTitle: true,
-          ),
-          body: _questionIndex < _questions.length
-              ? Quiz(
-                  answerQuestion: _answerQuestion,
-                  questionIndex: _questionIndex,
-                  questions: _questions,
-                )
-              : const Result()),
+        appBar: AppBar(
+          title: const Text('Exam app'),
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(_totalScore),
+      ),
     );
   }
 }
