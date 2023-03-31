@@ -33,7 +33,7 @@ class Result extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          TextButton(
+          OutlinedButton(
             onPressed: resetHandler,
             child: const Text(
               'Restart Quiz!',
